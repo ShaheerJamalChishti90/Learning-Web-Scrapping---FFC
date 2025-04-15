@@ -1,17 +1,22 @@
 from bs4 import BeautifulSoup
 
-
 with open("D:\\Visual Studio Codes\\Beautiful Soup Free Code Camp\\web scrapping\\home.html", "r") as file:
     contents = file.read()
     
-soup = BeautifulSoup(contents, "lxml") # or "html.parser"/this will parse the file in lxml format
+soup = BeautifulSoup(contents, "lxml") 
 
-# print(soup.prettify()) # this will print the file in a readable format
+course_cards = soup.find_all("div", class_="card")
 
-# tags = soup.find_all("a") # this will find all the tags in the file
-
-# tags = soup.find("h1") # this will find the first  occourence of h1 tag in the file
-
-tags = soup.find_all("h5") # this will find all the tags in the file
-print(tags) # this will print the tags in the file
-
+for course in course_cards:
+    # print(course)  
+    
+    course_name = course.h5.text.strip() # Extract the course name from the h5 tag
+    course_price = course.a.text.strip()
+    print(course_name)
+    print(f"{course_price}\n") 
+     
+    # print(course.h5.text)  # Print the text content of each course card
+    # print(course.text)  # Print the text content of each course card
+    
+    # print(course.text.strip())  # Print the text content of each course card
+    # print("-----")  # Separator for readability
